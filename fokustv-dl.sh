@@ -30,7 +30,7 @@ parallels=16;
 wgetcmd="wget -q";
 
 # Execute getopt
-ARGS=$(getopt -o "hvVr:p:q:" -l "help,verbose,version,resum:e,parallels:,quality:" -n "Fokus.tv downloader" -- "$@");
+ARGS=$(getopt -o "hvVr:p:q:" -l "help,verbose,version,resume:,parallels:,quality:" -n "Fokus.tv downloader" -- "$@");
  
 #Bad arguments
 if [ $? -ne 0 ];
