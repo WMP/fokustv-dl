@@ -106,20 +106,6 @@ elif [[ $parallels_version -ge '20111022' ]]; then
     parallels_options="parallel -j $parallels --halt 1 --progress --no-notice --joblog logs --resume";
 fi
 
-# if [[ "$resume" != 0 ]]; then
-#     if [ ! -d "$resume" ]; then
-#         echo "Error: Resume path: $path not exis";
-#         exit 1;
-#     fi
-#     
-#     cd "$resume";
-#     
-#     $parallels_options;
-#     ffmpeg -loglevel fatal -i "concat:`for i in *.ts; do echo -n "$i|"; done`" -c copy -bsf:a aac_adtstoasc "../resume.mp4" || exit 1;
-#     cd ..; # rm -rf $tempdir;
-    
-
-
 if [[ -z $@ ]]; then
     echo "Write one URL per line, if end press Ctrl+D or empty line:"
     while read -r -p "URL: "; do [[ $REPLY ]] || break; url_array+=("$REPLY"); done
