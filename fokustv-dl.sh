@@ -98,12 +98,12 @@ command -v parallel >/dev/null 2>&1 || { echo >&2 "I require parallel but it's n
 command -v ffmpeg >/dev/null 2>&1 || { echo >&2 "I require ffmpeg but it's not installed. Aborting."; exit 1; }
 
 # Check parallels version
-parallels_version=$(parallel --version | head -n 1 | sed 's/GNU parallel //');
-if [[ $parallels_version -ge '20131122' ]]; then
-    parallels_options="parallel -j $parallels --halt 1 --bar --no-notice --tag --res logs --resume-failed";
-elif [[ $parallels_version -ge '20111022' ]]; then
+parallels_version=$(parallel --gnu --version | head -n 1 | sed 's/GNU parallel //');
+if [[ "$parallels_version" -ge '20131122' ]]; then
+    parallels_options="parallel -j "$parallels" --halt 1 --bar --no-notice --tag --res logs --resume-failed";
+elif [[ "$parallels_version" -ge '20111022' ]]; then
     echo "Warning: You using old parallel version, this version isn't full compatible. "
-    parallels_options="parallel -j $parallels --halt 1 --progress --no-notice --joblog logs --resume";
+    parallels_options="parallel --gnu -j "$parallels" --halt 1 --progress --no-notice --joblog logs --resume";
 fi
 
 if [[ -z $@ ]]; then
@@ -162,7 +162,7 @@ for url in ${url_array[@]}; do
         fi;
         $(i++);
     done;
-    echo "Download: $title";
+    echo "Download: "$title"";
     if [[ -z $quality_id_select ]]; then
         echo "Your quality ($quality) is not available for this video, so I download ${quality_options[0]}";
         quality_id=0;
