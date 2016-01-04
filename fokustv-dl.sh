@@ -124,16 +124,19 @@ for url in ${url_array[@]}; do
             quality_id_select=$i;
             break;
         fi;
-        $(i++);
+        ((i++));
     done;
     echo "Download: $title";
+    echo "url: '$url'," > download.conf
+    echo "title: '$title'," >> download.conf
+    
     if [[ -z $quality_id_select ]]; then
         echo "Your quality ($quality) is not available for this video, so I download ${quality_options[0]}";
         quality_id=0;
     else 
         quality_id=$quality_id_select;
     fi
-    
+    echo "quality_id: '$quality_id'," >> download.conf
     IFS=$IFS_backup
     
     videoslist=$($wgetcmd -O - "${quality_url[$quality_id]}") || exit 1;
@@ -148,4 +151,5 @@ for url in ${url_array[@]}; do
 
     ffmpeg -loglevel fatal -i "concat:`for i in *.ts; do echo -n "$i|"; done`" -c copy -bsf:a aac_adtstoasc "../$title.mp4" || exit 1;
     cd ..; rm -rf $tempdir;
+    echo "Finished, downloaded file is in: "$PWD"/"$title".mp4"
 done;
