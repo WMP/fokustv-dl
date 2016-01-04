@@ -98,7 +98,7 @@ command -v parallel >/dev/null 2>&1 || { echo >&2 "I require parallel but it's n
 command -v ffmpeg >/dev/null 2>&1 || { echo >&2 "I require ffmpeg but it's not installed. Aborting."; exit 1; }
 
 # Check parallels version
-parallels_version=$(parallel -V | head -n 1 | sed 's/GNU parallel //');
+parallels_version=$(parallel --version | head -n 1 | sed 's/GNU parallel //');
 if [[ $parallels_version -ge '20131122' ]]; then
     parallels_options="parallel -j $parallels --halt 1 --bar --no-notice --tag --res logs --resume-failed";
 elif [[ $parallels_version -ge '20111022' ]]; then
