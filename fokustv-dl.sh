@@ -2,7 +2,7 @@
 
 # Define help function
 function help(){
-    echo "Fokus.tv downloader - Script to download videos from fokus.tv";
+    echo "Fokustv-dl - Script to download videos from fokus.tv";
     echo "Usage example:";
     echo "$SCRIPT_NAME [(-h|--help)] [(-v|--verbose)] [(-V|--version)] [(-r|--resume)] [(-p|--parallels) integer] [(-q|--quality) integer] [URLs]";
     echo "Options:";
