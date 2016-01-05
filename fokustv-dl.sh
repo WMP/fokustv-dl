@@ -100,10 +100,10 @@ command -v ffmpeg >/dev/null 2>&1 || { echo >&2 "I require ffmpeg but it's not i
 # Check parallels version
 parallels_version=$(parallel --gnu --version | head -n 1 | sed 's/GNU parallel //');
 if [[ "$parallels_version" -ge '20131122' ]]; then
-    parallels_options="parallel -j "$parallels" --halt 1 --bar --no-notice --tag --res logs --resume-failed";
+    parallels_options="parallel -j "$parallels" --halt 3 --bar --no-notice --tag --res logs --resume-failed";
 elif [[ "$parallels_version" -ge '20111022' ]]; then
     echo "Warning: You using old parallel version, this version isn't full compatible. "
-    parallels_options="parallel --gnu -j "$parallels" --halt 1 --progress --joblog logs --resume";
+    parallels_options="parallel --gnu -j "$parallels" --halt 3 --progress --joblog logs --resume";
 fi
 
 if [[ -z $@ ]]; then
